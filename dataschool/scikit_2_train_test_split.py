@@ -9,6 +9,8 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn import metrics
 from sklearn.cross_validation import train_test_split
+from sklearn.decomposition import PCA
+import matplotlib.pyplot as plt
 
 # import some data to play with
 iris = datasets.load_iris()
@@ -39,7 +41,7 @@ print 'knn5:', metrics.accuracy_score(y, y_pred)
 # train / test split
 #
 
-X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.4, 
+X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.4,
                                                     random_state=4) # no random split each time!
 
 logreg.fit(X_train, y_train)
@@ -54,3 +56,10 @@ knn5.fit(X_train, y_train)
 y_pred = knn5.predict(X_test)
 print 'knn5:', metrics.accuracy_score(y_test, y_pred)
 
+
+# Plot
+pca = PCA(n_components=2) # Reduce to 2D!
+pca.fit(iris.data)
+X = pca.transform(iris.data)
+plt.scatter(X[:, 0], X[:, 1], c=iris.target)
+plt.show()

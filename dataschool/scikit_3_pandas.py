@@ -47,4 +47,3 @@ print 'RMSE:', np.sqrt(metrics.mean_squared_error(y_test,y_pred))
 #
 
 plt.show()
-
